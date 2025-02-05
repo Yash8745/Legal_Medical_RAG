@@ -1,0 +1,19 @@
+#chat-container {
+    background-color: #f8f9fa;
+    border-color: #dee2e6 !important;
+}
+
+.alert {
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 1rem;
+}
+
+.alert-primary {
+    background-color: #e3f2fd;
+    border-color: #bbdefb;
+}
+
+.alert-secondary {
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}

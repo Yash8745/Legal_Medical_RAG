@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <h2 class="mb-4">Chat with PDF: {{ filename }}</h2>
+        <div id="chat-container" class="border rounded p-3 mb-3" style="height: 400px; overflow-y: auto;">
+            <div id="chat-messages"></div>
+        </div>
+        <div class="input-group mb-3">
+            <input type="text" id="question-input" class="form-control" placeholder="Ask a question...">
+            <button class="btn btn-primary" onclick="sendQuestion()">Send</button>
+        </div>
+    </div>
+</div>
+
+<script>
+let currentFilename = "{{ filename }}";
+
+function sendQuestion() {
+    const question = $('#question-input').val();
+    if (!question) return;
+
+    // Add user message
+    appendMessage('You: ' + question, 'user');
+    
+    // Send to backend
+    $.post('/ask', {
+        question: question,
+        filename: currentFilename
+    }, function(data) {
+        appendMessage('AI: ' + data.response, 'bot');
+    });
+    
+    // Clear input
+    $('#question-input').val('');
+}
+
+function appendMessage(text, sender) {
+    const messageDiv = $('<div>').addClass(`alert ${sender === 'user' ? 'alert-primary' : 'alert-secondary'}`).text(text);
+    $('#chat-messages').append(messageDiv);
+    // Scroll to bottom
+    $('#chat-container').scrollTop($('#chat-container')[0].scrollHeight);
+}
+</script>
+{% endblock %}
