@@ -13,6 +13,7 @@ transformers
 pinecone
 langchain-pinecone 
 pinecone-notebooks
+pinecone[grpc]
 
 #pdf
 unstructured
