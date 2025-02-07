@@ -26,12 +26,16 @@ langchain
 langchain-text-splitters 
 langchain-community 
 langgraph
-
-
 langchain-groq
-
-langchain-huggingface
 langchain-core
+langchain-huggingface
+
+
+
+#Gemini
+google-genai
+
+
 bs4
 
 kagglehub
