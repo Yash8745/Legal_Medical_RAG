@@ -29,7 +29,7 @@ langgraph
 langchain-groq
 langchain-core
 langchain-huggingface
-
+langchain-google-genai
 
 
 #Gemini
