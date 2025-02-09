@@ -3,6 +3,11 @@ import os
 
 def setup_logger():
     """Sets up and returns a logger for tracking events."""
+
+    werkzeug_logger = logging.getLogger('werkzeug')
+    werkzeug_logger.setLevel(logging.ERROR) 
+    werkzeug_logger.propagate = False
+
     log_dir = "logs"
     if not os.path.exists(log_dir):
         os.makedirs(log_dir)
