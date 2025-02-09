@@ -1,0 +1,53 @@
+2025-02-08 20:08:05,125 - ERROR - File path ../data/raw/(2) 2022-06-02 to 2023-05-02- Upright Athlete PT recs (Bates Stamped).pdf does not exist. Please check the path.
+2025-02-08 20:10:04,913 - ERROR - File path /data/raw/(4).pdf does not exist. Please check the path.
+2025-02-08 20:13:00,070 - INFO - Starting document summarization process.
+2025-02-08 20:13:00,070 - INFO - Initializing embeddings model.
+2025-02-08 20:13:05,224 - INFO - Use pytorch device_name: cpu
+2025-02-08 20:13:05,224 - INFO - Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-02-08 20:13:08,829 - INFO - Embeddings model initialized successfully.
+2025-02-08 20:13:09,345 - INFO - Extracting text from PDF: ../data/raw/(2) 2022-06-02 to 2023-05-02- Upright Athlete PT recs (Bates Stamped).pdf
+2025-02-08 20:13:09,419 - ERROR - Error extracting text: File path ../data/raw/(2) 2022-06-02 to 2023-05-02- Upright Athlete PT recs (Bates Stamped).pdf is not a valid file or url
+2025-02-08 20:13:09,420 - ERROR - Error summarizing document: File path ../data/raw/(2) 2022-06-02 to 2023-05-02- Upright Athlete PT recs (Bates Stamped).pdf is not a valid file or url
+2025-02-08 20:16:09,360 - INFO - Starting document summarization process.
+2025-02-08 20:16:09,360 - INFO - Initializing embeddings model.
+2025-02-08 20:16:14,848 - INFO - Use pytorch device_name: cpu
+2025-02-08 20:16:14,848 - INFO - Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-02-08 20:16:20,295 - INFO - Embeddings model initialized successfully.
+2025-02-08 20:16:20,809 - INFO - Extracting text from PDF: ../data/raw/(2) 2022-06-02 to 2023-05-02- Upright Athlete PT recs (Bates Stamped).pdf
+2025-02-08 20:16:20,876 - ERROR - Error extracting text: File path ../data/raw/(2) 2022-06-02 to 2023-05-02- Upright Athlete PT recs (Bates Stamped).pdf is not a valid file or url
+2025-02-08 20:16:20,876 - ERROR - Error summarizing document: File path ../data/raw/(2) 2022-06-02 to 2023-05-02- Upright Athlete PT recs (Bates Stamped).pdf is not a valid file or url
+2025-02-08 20:18:37,591 - INFO - summarize_document.py - Starting document summarization process.
+2025-02-08 20:18:37,592 - INFO - embedding.py - Initializing embeddings model.
+2025-02-08 20:18:42,730 - INFO - SentenceTransformer.py - Use pytorch device_name: cpu
+2025-02-08 20:18:42,730 - INFO - SentenceTransformer.py - Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-02-08 20:18:46,879 - INFO - embedding.py - Embeddings model initialized successfully.
+2025-02-08 20:18:47,394 - INFO - data_ingestion_util.py - Extracting text from PDF: ../data/raw/(2) 2022-06-02 to 2023-05-02- Upright Athlete PT recs (Bates Stamped).pdf
+2025-02-08 20:18:47,458 - ERROR - data_ingestion_util.py - Error extracting text: File path ../data/raw/(2) 2022-06-02 to 2023-05-02- Upright Athlete PT recs (Bates Stamped).pdf is not a valid file or url
+2025-02-08 20:18:47,459 - ERROR - summarize_document.py - Error summarizing document: File path ../data/raw/(2) 2022-06-02 to 2023-05-02- Upright Athlete PT recs (Bates Stamped).pdf is not a valid file or url
+2025-02-09 14:02:26,385 - INFO - summarize_document.py - Starting document summarization process.
+2025-02-09 14:02:26,386 - INFO - embedding.py - Initializing embeddings model.
+2025-02-09 14:02:36,445 - INFO - SentenceTransformer.py - Use pytorch device_name: cpu
+2025-02-09 14:02:36,445 - INFO - SentenceTransformer.py - Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-02-09 14:02:41,882 - INFO - embedding.py - Embeddings model initialized successfully.
+2025-02-09 14:02:42,616 - INFO - data_ingestion_util.py - Extracting text from PDF: data/raw/(4).pdf
+2025-02-09 14:02:43,046 - INFO - data_ingestion_util.py - Text extraction completed successfully.
+2025-02-09 14:02:43,046 - INFO - cluster.py - Clustering texts using embeddings.
+2025-02-09 14:02:46,855 - ERROR - cluster.py - Error clustering texts: n_samples=6 should be >= n_clusters=10.
+2025-02-09 14:02:46,855 - ERROR - summarize_document.py - Error summarizing document: n_samples=6 should be >= n_clusters=10.
+2025-02-09 14:06:04,536 - INFO - summarize_document.py - Starting document summarization process.
+2025-02-09 14:06:04,536 - INFO - embedding.py - Initializing embeddings model.
+2025-02-09 14:06:11,417 - INFO - SentenceTransformer.py - Use pytorch device_name: cpu
+2025-02-09 14:06:11,417 - INFO - SentenceTransformer.py - Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-02-09 14:06:17,130 - INFO - embedding.py - Embeddings model initialized successfully.
+2025-02-09 14:06:17,838 - INFO - data_ingestion_util.py - Extracting text from PDF: data/raw/(4).pdf
+2025-02-09 14:06:18,173 - INFO - data_ingestion_util.py - Text extraction completed successfully.
+2025-02-09 14:06:18,173 - INFO - cluster.py - Clustering texts using embeddings.
+2025-02-09 14:06:20,844 - INFO - cluster.py - Text clustering completed successfully.
+2025-02-09 14:06:20,844 - INFO - summarization.py - Summarizing texts using LLM.
+2025-02-09 14:06:21,719 - INFO - _client.py - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-09 14:06:22,331 - INFO - _client.py - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-09 14:06:22,944 - INFO - _client.py - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-09 14:06:23,559 - INFO - _client.py - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-09 14:06:24,276 - INFO - _client.py - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-09 14:06:24,278 - INFO - summarization.py - Text summarization completed successfully.
+2025-02-09 14:06:24,278 - INFO - summarize_document.py - Document summarization completed successfully.
