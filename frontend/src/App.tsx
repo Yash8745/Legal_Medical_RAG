@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import {uploadFile, sendMessage} from './api/api';
+
 import {
   FileUp,
   Send,
@@ -24,9 +26,16 @@ function App() {
   const [inputMessage, setInputMessage] = useState('');
   const [darkMode, setDarkMode] = useState(false);
 
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async(event: React.ChangeEvent<HTMLInputElement>) => {
+
     const file = event.target.files?.[0];
+
     if (file && file.type === 'application/pdf') {
+
+      const response = await uploadFile(file);
+      console.log("Upload successful:", response);
+
+
       const newDoc: Document = {
         id: Math.random().toString(36).substr(2, 9),
         name: file.name,
@@ -35,6 +44,23 @@ function App() {
       setDocuments([...documents, newDoc]);
     }
   };
+
+  const handleSendMessage = async () => {
+    if (inputMessage.trim()) {
+      try {
+        const response = await sendMessage(inputMessage);
+        console.log('Message sent successfully:', response);
+
+
+        // Optionally, update your UI or state based on the response
+
+      } catch (error) {
+        console.error('Error sending message:', error);
+      }
+      setInputMessage(''); // Clear the input after sending
+    }
+  };
+  
 
   const toggleDocument = (id: string) => {
     setDocuments(docs =>
@@ -173,10 +199,15 @@ function App() {
                     ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400'
                     : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
                 }`}
-                onKeyPress={(e) => e.key === 'Enter' && inputMessage.trim() && setInputMessage('')}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleSendMessage();
+                  }
+                }}
               />
               <button
-                onClick={() => inputMessage.trim() && setInputMessage('')}
+                onClick={handleSendMessage}
                 className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all hover:scale-[1.02] shadow-sm flex items-center gap-2"
               >
                 <Send className="w-4 h-4" />

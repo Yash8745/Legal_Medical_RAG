@@ -2,8 +2,9 @@
 python-dotenv
 rich
 
-
+#Backend
 Flask
+flask_cors
 
 
 #Preprocessing 

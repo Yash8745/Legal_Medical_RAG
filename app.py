@@ -1,50 +1,55 @@
-from flask import Flask, render_template, request, redirect, url_for
-import os
+# backend/routes.py
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+from utils.logger import setup_logger
+
+logger = setup_logger()
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = 'uploads'
-app.config['ALLOWED_EXTENSIONS'] = {'pdf'}
+CORS(app)  # Allow frontend to access backend
 
-# Create uploads directory if it doesn't exist
-if not os.path.exists(app.config['UPLOAD_FOLDER']):
-    os.makedirs(app.config['UPLOAD_FOLDER'])
-
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
 @app.route('/')
-def index():
-    return render_template('index.html')
+def home():
+    return jsonify({'message': 'Welcome to the Document Summarizer API'})
+
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:
-        return redirect(request.url)
+        return jsonify({'error': 'No file uploaded'}), 400
+    
     file = request.files['file']
-    if file.filename == '':
-        return redirect(request.url)
-    if file and allowed_file(file.filename):
-        filename = file.filename
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        return redirect(url_for('chat', filename=filename))
-    return redirect(request.url)
 
-@app.route('/chat/<filename>')
-def chat(filename):
-    return render_template('chat.html', filename=filename)
+    file.save(f"uploads/{file.filename}")  # Save file locally
 
-@app.route('/ask', methods=['POST'])
-def ask_question():
+    return jsonify({'message': 'File uploaded successfully'})
+
+
+# @app.route('/documents', methods=['GET'])
+# def fetch_documents():
+#     docs = ["doc1.pdf", "doc2.pdf"]  # Replace with actual logic
+#     return jsonify({'documents': docs})
+
+
+# @app.route('/summary/<doc_id>', methods=['GET'])
+# def get_summary(doc_id):
+#     return jsonify({'doc_id': doc_id, 'summary': 'Sample summary'})
+
+
+
+
+@app.route('/chat', methods=['POST'])
+def chat():
     data = request.json
-    question = data.get('question')
-    filename = data.get('filename')
-    
-    # Here you would add your RAG processing logic
-    # For now, just return a dummy response
-    response = f"Received question: '{question}' for file: {filename}"
-    
-    return {'response': response}
+    message = data.get('message', '')
+    logger.info(f"Received message: {message}")
+    response = f"Received: {message}"  # Replace with AI logic
+    return jsonify({'response': response})
+
+
+
+
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5000)
