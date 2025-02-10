@@ -56,7 +56,7 @@ def chat():
     message = data.get('message', '')
     logger.info(f"Received message: {message}")
     response = summarize_document(FILE_PATH)
-    logger.info(f"Response: {response[:100]}")
+    logger.info(f"Response: {response}")
     return jsonify({'response': response})
 
 

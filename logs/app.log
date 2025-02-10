@@ -156,3 +156,93 @@
 **Patient:** Mark Chandler
 
 **Diagnoses:*
+2025-02-10 15:11:32,080 - INFO - app.py - Received message: briefing doc
+2025-02-10 15:11:32,080 - INFO - summarize_document.py - Starting document summarization process.
+2025-02-10 15:11:32,080 - INFO - embedding.py - Initializing embeddings model.
+2025-02-10 15:11:32,082 - INFO - SentenceTransformer.py - Use pytorch device_name: cpu
+2025-02-10 15:11:32,082 - INFO - SentenceTransformer.py - Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-02-10 15:11:35,123 - INFO - embedding.py - Embeddings model initialized successfully.
+2025-02-10 15:11:35,520 - INFO - data_ingestion_util.py - Extracting text from PDF: uploads
+2025-02-10 15:11:39,673 - INFO - data_ingestion_util.py - Text extraction completed successfully.
+2025-02-10 15:11:39,673 - INFO - cluster.py - Clustering texts using embeddings.
+2025-02-10 15:12:19,177 - INFO - cluster.py - Text clustering completed successfully.
+2025-02-10 15:12:19,178 - INFO - summarization.py - Summarizing texts using LLM.
+2025-02-10 15:12:19,905 - INFO - _client.py - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-10 15:12:19,906 - INFO - summarization.py - Text summarization completed successfully.
+2025-02-10 15:12:19,906 - INFO - summarize_document.py - Document summarization completed successfully.
+2025-02-10 15:12:19,906 - INFO - app.py - Response: Here is a concise summary of the physical therapy reports:
+
+**Patient:** Mark Chandler
+
+**Diagnoses:
+2025-02-10 15:17:27,514 - INFO - app.py - Received message: briefing doc
+2025-02-10 15:17:27,514 - INFO - summarize_document.py - Starting document summarization process.
+2025-02-10 15:17:27,514 - INFO - embedding.py - Initializing embeddings model.
+2025-02-10 15:17:27,516 - INFO - SentenceTransformer.py - Use pytorch device_name: cpu
+2025-02-10 15:17:27,516 - INFO - SentenceTransformer.py - Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-02-10 15:17:31,834 - INFO - embedding.py - Embeddings model initialized successfully.
+2025-02-10 15:17:32,241 - INFO - data_ingestion_util.py - Extracting text from PDF: uploads
+2025-02-10 15:17:36,183 - INFO - data_ingestion_util.py - Text extraction completed successfully.
+2025-02-10 15:17:36,183 - INFO - cluster.py - Clustering texts using embeddings.
+2025-02-10 15:18:14,382 - INFO - cluster.py - Text clustering completed successfully.
+2025-02-10 15:18:14,383 - INFO - summarization.py - Summarizing texts using LLM.
+2025-02-10 15:18:15,067 - INFO - _client.py - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-10 15:18:15,069 - INFO - summarization.py - Text summarization completed successfully.
+2025-02-10 15:18:15,069 - INFO - summarize_document.py - Document summarization completed successfully.
+2025-02-10 15:18:15,069 - INFO - app.py - Response: Here is a concise summary:
+
+**Patient Information:**
+Mark Chandler, male, with diagnoses of L should
+2025-02-10 15:20:08,047 - INFO - app.py - Received message: briefing doc
+2025-02-10 15:20:08,047 - INFO - summarize_document.py - Starting document summarization process.
+2025-02-10 15:20:08,047 - INFO - embedding.py - Initializing embeddings model.
+2025-02-10 15:20:08,049 - INFO - SentenceTransformer.py - Use pytorch device_name: cpu
+2025-02-10 15:20:08,049 - INFO - SentenceTransformer.py - Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-02-10 15:20:11,078 - INFO - embedding.py - Embeddings model initialized successfully.
+2025-02-10 15:20:11,435 - INFO - data_ingestion_util.py - Extracting text from PDF: uploads
+2025-02-10 15:20:15,179 - INFO - data_ingestion_util.py - Text extraction completed successfully.
+2025-02-10 15:20:15,179 - INFO - cluster.py - Clustering texts using embeddings.
+2025-02-10 15:20:54,480 - INFO - cluster.py - Text clustering completed successfully.
+2025-02-10 15:20:54,480 - INFO - summarization.py - Summarizing texts using LLM.
+2025-02-10 15:20:55,114 - INFO - _client.py - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-10 15:20:55,115 - INFO - summarization.py - Text summarization completed successfully.
+2025-02-10 15:20:55,115 - INFO - summarize_document.py - Document summarization completed successfully.
+2025-02-10 15:20:55,115 - INFO - app.py - Response: Here is a concise summary:
+
+Patient Mark Chandler is a 6th visit out-patient physical therapy patien
+2025-02-10 15:24:50,992 - INFO - app.py - Received message: briefing doc
+2025-02-10 15:24:50,992 - INFO - summarize_document.py - Starting document summarization process.
+2025-02-10 15:24:50,992 - INFO - embedding.py - Initializing embeddings model.
+2025-02-10 15:24:50,994 - INFO - SentenceTransformer.py - Use pytorch device_name: cpu
+2025-02-10 15:24:50,994 - INFO - SentenceTransformer.py - Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-02-10 15:24:55,403 - INFO - embedding.py - Embeddings model initialized successfully.
+2025-02-10 15:24:55,800 - INFO - data_ingestion_util.py - Extracting text from PDF: uploads
+2025-02-10 15:25:00,950 - INFO - data_ingestion_util.py - Text extraction completed successfully.
+2025-02-10 15:25:00,951 - INFO - cluster.py - Clustering texts using embeddings.
+2025-02-10 15:26:36,243 - INFO - cluster.py - Text clustering completed successfully.
+2025-02-10 15:26:36,243 - INFO - summarization.py - Summarizing texts using LLM.
+2025-02-10 15:26:36,942 - INFO - _client.py - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-10 15:26:36,944 - INFO - summarization.py - Text summarization completed successfully.
+2025-02-10 15:26:36,944 - INFO - summarize_document.py - Document summarization completed successfully.
+2025-02-10 15:26:36,944 - INFO - app.py - Response: Here is a concise summary of the physical therapy report:
+
+**Patient Information:**
+Mark Chandler, 6
+2025-02-10 15:27:12,340 - INFO - app.py - Received message: briefing doc
+2025-02-10 15:27:12,340 - INFO - summarize_document.py - Starting document summarization process.
+2025-02-10 15:27:12,340 - INFO - embedding.py - Initializing embeddings model.
+2025-02-10 15:27:12,342 - INFO - SentenceTransformer.py - Use pytorch device_name: cpu
+2025-02-10 15:27:12,342 - INFO - SentenceTransformer.py - Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-02-10 15:27:15,573 - INFO - embedding.py - Embeddings model initialized successfully.
+2025-02-10 15:27:15,975 - INFO - data_ingestion_util.py - Extracting text from PDF: uploads
+2025-02-10 15:27:20,380 - INFO - data_ingestion_util.py - Text extraction completed successfully.
+2025-02-10 15:27:20,380 - INFO - cluster.py - Clustering texts using embeddings.
+2025-02-10 15:28:48,834 - INFO - cluster.py - Text clustering completed successfully.
+2025-02-10 15:28:48,834 - INFO - summarization.py - Summarizing texts using LLM.
+2025-02-10 15:28:49,594 - INFO - _client.py - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-10 15:28:49,595 - INFO - summarization.py - Text summarization completed successfully.
+2025-02-10 15:28:49,595 - INFO - summarize_document.py - Document summarization completed successfully.
+2025-02-10 15:28:49,595 - INFO - app.py - Response: Here is a concise summary of the physical therapy report:
+
+**Patient:** Mark Chandler
+**Diagnosis:**

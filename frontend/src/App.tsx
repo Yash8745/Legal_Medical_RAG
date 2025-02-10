@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import {uploadFile, sendMessage} from './api/api';
+import React, { useState, useEffect, useRef } from 'react';
+import { uploadFile, sendMessage } from './api/api';
 
 import {
   FileUp,
@@ -21,20 +21,31 @@ interface Document {
   selected: boolean;
 }
 
+interface ChatMessage {
+  id: string;
+  content: string;
+  sender: "system" | "user";
+  loading?: boolean;
+}
+
 function App() {
   const [documents, setDocuments] = useState<Document[]>([]);
-  const [inputMessage, setInputMessage] = useState('');
+  const [inputMessage, setInputMessage] = useState(''); // no longer used for sending messages
   const [darkMode, setDarkMode] = useState(false);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const chatEndRef = useRef<HTMLDivElement>(null);
 
-  const handleFileUpload = async(event: React.ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    // Auto-scroll to the bottom whenever messages change
+    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
 
     if (file && file.type === 'application/pdf') {
-
       const response = await uploadFile(file);
       console.log("Upload successful:", response);
-
 
       const newDoc: Document = {
         id: Math.random().toString(36).substr(2, 9),
@@ -45,22 +56,54 @@ function App() {
     }
   };
 
+  // Existing function for sending a message (retained for reference)
   const handleSendMessage = async () => {
     if (inputMessage.trim()) {
       try {
         const response = await sendMessage(inputMessage);
         console.log('Message sent successfully:', response);
-
-
         // Optionally, update your UI or state based on the response
-
       } catch (error) {
         console.error('Error sending message:', error);
       }
-      setInputMessage(''); // Clear the input after sending
+      setInputMessage('');
     }
   };
-  
+
+  // Updated function for the Briefing Doc button with loading and summary display
+  const handleBriefingDoc = async () => {
+    // Add a loading message to the chat
+    const loadingMessageId = Math.random().toString(36).substr(2, 9);
+    setMessages(prev => [
+      ...prev,
+      { id: loadingMessageId, content: "Loading summary...", sender: "system", loading: true }
+    ]);
+
+    try {
+      // Call the API to get the summary
+      const response = await sendMessage("briefing doc");
+      // Extract a string from the response: check for "response" then "summary"
+      const summaryText =
+        typeof response === "string"
+          ? response
+          : response.response || response || "No summary available.";
+
+      // Update the loading message with the summary text
+      setMessages(prev =>
+        prev.map(msg =>
+          msg.id === loadingMessageId ? { ...msg, content: summaryText, loading: false } : msg
+        )
+      );
+      console.log('Briefing Doc API request sent successfully:', response);
+    } catch (error) {
+      console.error('Error sending Briefing Doc request:', error);
+      setMessages(prev =>
+        prev.map(msg =>
+          msg.id === loadingMessageId ? { ...msg, content: "Error loading summary.", loading: false } : msg
+        )
+      );
+    }
+  };
 
   const toggleDocument = (id: string) => {
     setDocuments(docs =>
@@ -166,6 +209,8 @@ function App() {
               ].map(({ icon: Icon, label }) => (
                 <button
                   key={label}
+                  // For "Briefing Doc", attach the new handler that shows a loading bubble and then updates it with the summary.
+                  onClick={label === 'Briefing Doc' ? handleBriefingDoc : undefined}
                   className={`flex items-center gap-2 px-5 py-3 rounded-lg transition-all hover:scale-[1.02] ${
                     darkMode
                       ? 'bg-gray-700 hover:bg-gray-600 text-gray-200'
@@ -180,12 +225,24 @@ function App() {
           </div>
         </div>
 
+        {/* Chat messages panel */}
         <div className={`flex-1 overflow-y-auto p-8 ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
-          <div className="max-w-3xl mx-auto">
-            {/* Chat messages would go here */}
+          <div className="max-w-3xl mx-auto flex flex-col space-y-4">
+            {messages.map(msg => (
+              <div
+                key={msg.id}
+                className={`p-4 rounded-lg max-w-md ${darkMode ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-800'} ${msg.sender === 'system' ? 'self-start' : 'self-end'}`}
+              >
+                <p>{msg.content}</p>
+                {msg.loading && <span className="text-xs text-gray-500">Loading...</span>}
+              </div>
+            ))}
+            <div ref={chatEndRef} />
           </div>
         </div>
 
+        {/*
+        // Commented out the chat input area with text field and Send button
         <div className={`p-8 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-t`}>
           <div className="max-w-3xl mx-auto">
             <div className="flex gap-3">
@@ -216,6 +273,7 @@ function App() {
             </div>
           </div>
         </div>
+        */}
       </div>
     </div>
   );
