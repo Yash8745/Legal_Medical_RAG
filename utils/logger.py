@@ -1,6 +1,17 @@
 import logging
 import os
 
+SUCCESS = 25  # Between INFO (20) and WARNING (30)
+logging.addLevelName(SUCCESS, "SUCCESS")
+
+def success(self, message, *args, **kwargs):
+    """Custom logging method for success messages."""
+    if self.isEnabledFor(SUCCESS):
+        self._log(SUCCESS, message, args, **kwargs)
+
+# Add the success method to the Logger class
+logging.Logger.success = success
+
 def setup_logger():
     """Sets up and returns a logger for tracking events."""
 

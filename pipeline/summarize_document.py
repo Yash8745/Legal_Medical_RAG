@@ -27,7 +27,7 @@ def summarize_document(file_path):
 if __name__ == "__main__":
     
     import os
-    FILE_PATH = "data/raw/(4).pdf"
+    FILE_PATH = "uploads"
 
     if not os.path.exists(FILE_PATH):
         logger.error(f"File path {FILE_PATH} does not exist. Please check the path.")

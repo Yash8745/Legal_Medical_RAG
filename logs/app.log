@@ -1,0 +1,158 @@
+2025-02-10 14:02:10,974 - INFO - summarize_document.py - Starting document summarization process.
+2025-02-10 14:02:10,975 - INFO - embedding.py - Initializing embeddings model.
+2025-02-10 14:02:23,072 - INFO - SentenceTransformer.py - Use pytorch device_name: cpu
+2025-02-10 14:02:23,072 - INFO - SentenceTransformer.py - Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-02-10 14:02:27,134 - INFO - embedding.py - Embeddings model initialized successfully.
+2025-02-10 14:02:27,883 - INFO - data_ingestion_util.py - Extracting text from PDF: uploads
+2025-02-10 14:02:31,882 - INFO - data_ingestion_util.py - Text extraction completed successfully.
+2025-02-10 14:02:31,882 - INFO - cluster.py - Clustering texts using embeddings.
+2025-02-10 14:04:02,229 - INFO - cluster.py - Text clustering completed successfully.
+2025-02-10 14:04:02,229 - INFO - summarization.py - Summarizing texts using LLM.
+2025-02-10 14:04:02,981 - INFO - _client.py - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-10 14:04:03,001 - INFO - summarization.py - Text summarization completed successfully.
+2025-02-10 14:04:03,001 - INFO - summarize_document.py - Document summarization completed successfully.
+
+
+2025-02-10 14:17:37,394 - INFO - app.py - File uploaded: (5) 2023-10-04- OrthoCarolina rec (Bates Stamped).pdf
+2025-02-10 14:18:43,245 - INFO - app.py - Received message: summarize this 
+2025-02-10 14:19:24,537 - INFO - app.py - App setup complete.
+2025-02-10 14:19:24,812 - INFO - app.py - App setup complete.
+2025-02-10 14:20:42,411 - INFO - app.py - Received message: this is message
+2025-02-10 14:24:22,429 - INFO - app.py - Received message: how is this message name
+2025-02-10 14:24:22,429 - INFO - summarize_document.py - Starting document summarization process.
+2025-02-10 14:24:22,429 - INFO - embedding.py - Initializing embeddings model.
+2025-02-10 14:24:24,773 - INFO - app.py - Received message: how is this message name
+2025-02-10 14:24:24,773 - INFO - summarize_document.py - Starting document summarization process.
+2025-02-10 14:24:24,773 - INFO - embedding.py - Initializing embeddings model.
+2025-02-10 14:24:27,241 - INFO - app.py - Received message: how is this message name
+2025-02-10 14:24:27,241 - INFO - summarize_document.py - Starting document summarization process.
+2025-02-10 14:24:27,241 - INFO - embedding.py - Initializing embeddings model.
+2025-02-10 14:24:28,777 - INFO - app.py - Received message: how is this message name
+2025-02-10 14:24:28,777 - INFO - summarize_document.py - Starting document summarization process.
+2025-02-10 14:24:28,777 - INFO - embedding.py - Initializing embeddings model.
+2025-02-10 14:24:28,821 - INFO - app.py - Received message: how is this message name
+2025-02-10 14:24:28,821 - INFO - summarize_document.py - Starting document summarization process.
+2025-02-10 14:24:28,821 - INFO - embedding.py - Initializing embeddings model.
+2025-02-10 14:24:29,019 - INFO - app.py - Received message: how is this message name
+2025-02-10 14:24:29,020 - INFO - summarize_document.py - Starting document summarization process.
+2025-02-10 14:24:29,020 - INFO - embedding.py - Initializing embeddings model.
+2025-02-10 14:24:30,331 - INFO - SentenceTransformer.py - Use pytorch device_name: cpu
+2025-02-10 14:24:30,331 - INFO - SentenceTransformer.py - Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-02-10 14:24:30,334 - INFO - SentenceTransformer.py - Use pytorch device_name: cpu
+2025-02-10 14:24:30,335 - INFO - SentenceTransformer.py - Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-02-10 14:24:30,337 - INFO - SentenceTransformer.py - Use pytorch device_name: cpu
+2025-02-10 14:24:30,337 - INFO - SentenceTransformer.py - Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-02-10 14:24:30,339 - INFO - SentenceTransformer.py - Use pytorch device_name: cpu
+2025-02-10 14:24:30,339 - INFO - SentenceTransformer.py - Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-02-10 14:24:30,342 - INFO - SentenceTransformer.py - Use pytorch device_name: cpu
+2025-02-10 14:24:30,343 - INFO - SentenceTransformer.py - Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-02-10 14:24:30,345 - INFO - SentenceTransformer.py - Use pytorch device_name: cpu
+2025-02-10 14:24:30,345 - INFO - SentenceTransformer.py - Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-02-10 14:24:34,788 - INFO - embedding.py - Embeddings model initialized successfully.
+2025-02-10 14:24:34,910 - INFO - embedding.py - Embeddings model initialized successfully.
+2025-02-10 14:24:35,297 - INFO - embedding.py - Embeddings model initialized successfully.
+2025-02-10 14:24:36,016 - INFO - data_ingestion_util.py - Extracting text from PDF: uploads
+2025-02-10 14:24:36,067 - INFO - data_ingestion_util.py - Extracting text from PDF: uploads
+2025-02-10 14:24:36,079 - INFO - data_ingestion_util.py - Extracting text from PDF: uploads
+2025-02-10 14:24:36,335 - INFO - data_ingestion_util.py - Text extraction completed successfully.
+2025-02-10 14:24:36,337 - INFO - cluster.py - Clustering texts using embeddings.
+2025-02-10 14:24:36,344 - INFO - data_ingestion_util.py - Text extraction completed successfully.
+2025-02-10 14:24:36,344 - INFO - data_ingestion_util.py - Text extraction completed successfully.
+2025-02-10 14:24:36,344 - INFO - cluster.py - Clustering texts using embeddings.
+2025-02-10 14:24:36,345 - INFO - cluster.py - Clustering texts using embeddings.
+2025-02-10 14:24:37,494 - ERROR - cluster.py - Error clustering texts: n_samples=2 should be >= n_clusters=5.
+2025-02-10 14:24:37,495 - ERROR - cluster.py - Error clustering texts: n_samples=2 should be >= n_clusters=5.
+2025-02-10 14:24:37,495 - ERROR - summarize_document.py - Error summarizing document: n_samples=2 should be >= n_clusters=5.
+2025-02-10 14:24:37,495 - ERROR - cluster.py - Error clustering texts: n_samples=2 should be >= n_clusters=5.
+2025-02-10 14:24:37,498 - ERROR - summarize_document.py - Error summarizing document: n_samples=2 should be >= n_clusters=5.
+2025-02-10 14:24:37,499 - ERROR - summarize_document.py - Error summarizing document: n_samples=2 should be >= n_clusters=5.
+2025-02-10 14:24:37,976 - INFO - app.py - Received message: how is this message name
+2025-02-10 14:24:37,976 - INFO - summarize_document.py - Starting document summarization process.
+2025-02-10 14:24:37,976 - INFO - embedding.py - Initializing embeddings model.
+2025-02-10 14:24:37,978 - INFO - SentenceTransformer.py - Use pytorch device_name: cpu
+2025-02-10 14:24:37,978 - INFO - SentenceTransformer.py - Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-02-10 14:24:38,613 - INFO - embedding.py - Embeddings model initialized successfully.
+2025-02-10 14:24:39,018 - INFO - embedding.py - Embeddings model initialized successfully.
+2025-02-10 14:24:39,075 - INFO - data_ingestion_util.py - Extracting text from PDF: uploads
+2025-02-10 14:24:39,084 - INFO - data_ingestion_util.py - Text extraction completed successfully.
+2025-02-10 14:24:39,085 - INFO - cluster.py - Clustering texts using embeddings.
+2025-02-10 14:24:39,165 - INFO - embedding.py - Embeddings model initialized successfully.
+2025-02-10 14:24:39,313 - ERROR - cluster.py - Error clustering texts: n_samples=2 should be >= n_clusters=5.
+2025-02-10 14:24:39,313 - ERROR - summarize_document.py - Error summarizing document: n_samples=2 should be >= n_clusters=5.
+2025-02-10 14:24:39,686 - INFO - data_ingestion_util.py - Extracting text from PDF: uploads
+2025-02-10 14:24:39,694 - INFO - data_ingestion_util.py - Text extraction completed successfully.
+2025-02-10 14:24:39,695 - INFO - cluster.py - Clustering texts using embeddings.
+2025-02-10 14:24:39,866 - ERROR - cluster.py - Error clustering texts: n_samples=2 should be >= n_clusters=5.
+2025-02-10 14:24:39,867 - ERROR - summarize_document.py - Error summarizing document: n_samples=2 should be >= n_clusters=5.
+2025-02-10 14:24:39,892 - INFO - data_ingestion_util.py - Extracting text from PDF: uploads
+2025-02-10 14:24:39,918 - INFO - data_ingestion_util.py - Text extraction completed successfully.
+2025-02-10 14:24:39,918 - INFO - cluster.py - Clustering texts using embeddings.
+2025-02-10 14:24:40,413 - ERROR - cluster.py - Error clustering texts: n_samples=2 should be >= n_clusters=5.
+2025-02-10 14:24:40,414 - ERROR - summarize_document.py - Error summarizing document: n_samples=2 should be >= n_clusters=5.
+2025-02-10 14:24:41,333 - INFO - embedding.py - Embeddings model initialized successfully.
+2025-02-10 14:24:41,774 - INFO - data_ingestion_util.py - Extracting text from PDF: uploads
+2025-02-10 14:24:41,786 - INFO - data_ingestion_util.py - Text extraction completed successfully.
+2025-02-10 14:24:41,786 - INFO - cluster.py - Clustering texts using embeddings.
+2025-02-10 14:24:41,981 - ERROR - cluster.py - Error clustering texts: n_samples=2 should be >= n_clusters=5.
+2025-02-10 14:24:41,981 - ERROR - summarize_document.py - Error summarizing document: n_samples=2 should be >= n_clusters=5.
+2025-02-10 14:38:23,355 - INFO - app.py - Received message: hi messGE
+2025-02-10 14:38:23,355 - INFO - summarize_document.py - Starting document summarization process.
+2025-02-10 14:38:23,355 - INFO - embedding.py - Initializing embeddings model.
+2025-02-10 14:38:32,692 - INFO - SentenceTransformer.py - Use pytorch device_name: cpu
+2025-02-10 14:38:32,692 - INFO - SentenceTransformer.py - Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-02-10 14:38:36,161 - INFO - embedding.py - Embeddings model initialized successfully.
+2025-02-10 14:38:36,807 - INFO - data_ingestion_util.py - Extracting text from PDF: uploads
+2025-02-10 14:38:36,948 - INFO - data_ingestion_util.py - Text extraction completed successfully.
+2025-02-10 14:38:36,949 - INFO - cluster.py - Clustering texts using embeddings.
+2025-02-10 14:38:36,949 - ERROR - cluster.py - Error clustering texts: object of type 'HuggingFaceBgeEmbeddings' has no len()
+2025-02-10 14:38:36,949 - ERROR - summarize_document.py - Error summarizing document: object of type 'HuggingFaceBgeEmbeddings' has no len()
+2025-02-10 14:42:11,950 - INFO - app.py - Received message: does this work 
+2025-02-10 14:42:11,950 - INFO - summarize_document.py - Starting document summarization process.
+2025-02-10 14:42:11,951 - INFO - embedding.py - Initializing embeddings model.
+2025-02-10 14:42:18,137 - INFO - SentenceTransformer.py - Use pytorch device_name: cpu
+2025-02-10 14:42:18,137 - INFO - SentenceTransformer.py - Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-02-10 14:42:22,134 - INFO - embedding.py - Embeddings model initialized successfully.
+2025-02-10 14:42:22,665 - INFO - data_ingestion_util.py - Extracting text from PDF: uploads
+2025-02-10 14:42:22,772 - INFO - data_ingestion_util.py - Text extraction completed successfully.
+2025-02-10 14:42:22,772 - INFO - cluster.py - Clustering texts using embeddings.
+2025-02-10 14:42:22,772 - ERROR - cluster.py - Error clustering texts: 'Document' object has no attribute 'replace'
+2025-02-10 14:42:22,772 - ERROR - summarize_document.py - Error summarizing document: 'Document' object has no attribute 'replace'
+2025-02-10 14:44:34,752 - INFO - app.py - File uploaded: (2) 2022-06-02 to 2023-05-02- Upright Athlete PT recs (Bates Stamped).pdf
+2025-02-10 14:44:39,659 - INFO - app.py - Received message: summarize
+2025-02-10 14:44:39,659 - INFO - summarize_document.py - Starting document summarization process.
+2025-02-10 14:44:39,659 - INFO - embedding.py - Initializing embeddings model.
+2025-02-10 14:44:41,618 - INFO - app.py - Received message: summarize
+2025-02-10 14:44:41,618 - INFO - summarize_document.py - Starting document summarization process.
+2025-02-10 14:44:41,619 - INFO - embedding.py - Initializing embeddings model.
+2025-02-10 14:44:45,422 - INFO - SentenceTransformer.py - Use pytorch device_name: cpu
+2025-02-10 14:44:45,423 - INFO - SentenceTransformer.py - Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-02-10 14:44:45,426 - INFO - SentenceTransformer.py - Use pytorch device_name: cpu
+2025-02-10 14:44:45,426 - INFO - SentenceTransformer.py - Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-02-10 14:44:48,913 - INFO - embedding.py - Embeddings model initialized successfully.
+2025-02-10 14:44:48,944 - INFO - embedding.py - Embeddings model initialized successfully.
+2025-02-10 14:44:49,699 - INFO - data_ingestion_util.py - Extracting text from PDF: uploads
+2025-02-10 14:44:49,709 - INFO - data_ingestion_util.py - Extracting text from PDF: uploads
+2025-02-10 14:44:56,279 - INFO - data_ingestion_util.py - Text extraction completed successfully.
+2025-02-10 14:44:56,279 - INFO - cluster.py - Clustering texts using embeddings.
+2025-02-10 14:44:56,843 - INFO - data_ingestion_util.py - Text extraction completed successfully.
+2025-02-10 14:44:56,848 - INFO - cluster.py - Clustering texts using embeddings.
+2025-02-10 14:46:17,560 - INFO - cluster.py - Text clustering completed successfully.
+2025-02-10 14:46:17,562 - INFO - cluster.py - Text clustering completed successfully.
+2025-02-10 14:46:17,562 - INFO - summarization.py - Summarizing texts using LLM.
+2025-02-10 14:46:17,562 - INFO - summarization.py - Summarizing texts using LLM.
+2025-02-10 14:46:18,751 - INFO - _client.py - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-10 14:46:18,762 - INFO - summarization.py - Text summarization completed successfully.
+2025-02-10 14:46:18,762 - INFO - summarize_document.py - Document summarization completed successfully.
+2025-02-10 14:46:18,762 - INFO - app.py - Response: Here is a concise summary of the physical therapy report:
+
+**Patient:** Mark Chandler
+
+**Diagnoses:*
+2025-02-10 14:46:18,786 - INFO - _client.py - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-10 14:46:18,787 - INFO - summarization.py - Text summarization completed successfully.
+2025-02-10 14:46:18,788 - INFO - summarize_document.py - Document summarization completed successfully.
+2025-02-10 14:46:18,788 - INFO - app.py - Response: Here is a concise summary of the physical therapy report:
+
+**Patient:** Mark Chandler
+
+**Diagnoses:*
