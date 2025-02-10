@@ -1,9 +1,19 @@
 from langchain_groq import ChatGroq
+from langchain_google_genai import ChatGoogleGenerativeAI
 from utils.data_ingestion_util import extract_text_from_pdf
 from utils.logger import setup_logger
 from model.cluster import cluster_texts
 from model.summarization import summarize_texts
 from model.embedding import get_embeddings_model
+from dotenv import load_dotenv
+from rich import print
+import os
+
+load_dotenv()
+
+GEMINI_API_KEY=os.getenv("GEMINI_API_KEY")
+os.environ["GOOGLE_API_KEY"] = GEMINI_API_KEY
+print(GEMINI_API_KEY)
 
 logger = setup_logger()
 
@@ -12,7 +22,11 @@ def summarize_document(file_path):
     try:
         logger.info("Starting document summarization process.")
         embeddings = get_embeddings_model()
-        llm = ChatGroq(model="llama3-8b-8192")
+
+
+        # llm = ChatGroq(model="llama3-8b-8192")
+
+        llm = ChatGoogleGenerativeAI(model='gemini-2.0-flash')
         
         texts = extract_text_from_pdf(file_path)
         clustered_texts = cluster_texts(texts, embeddings)

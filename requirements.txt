@@ -31,10 +31,12 @@ langchain-groq
 langchain-core
 langchain-huggingface
 langchain-google-genai
+langchain-google-vertexai
 
 
 #Gemini
 google-genai
+langchain[google-vertexai]
 
 
 bs4
