@@ -5,7 +5,15 @@ SUCCESS = 25  # Between INFO (20) and WARNING (30)
 logging.addLevelName(SUCCESS, "SUCCESS")
 
 def success(self, message, *args, **kwargs):
-    """Custom logging method for success messages."""
+    """
+    Custom logging method for success messages.
+
+    Args:
+        message (str): The message to log.
+        *args: Variable length argument list.
+        **kwargs: Arbitrary keyword arguments.
+    
+    """
     if self.isEnabledFor(SUCCESS):
         self._log(SUCCESS, message, args, **kwargs)
 
@@ -13,7 +21,14 @@ def success(self, message, *args, **kwargs):
 logging.Logger.success = success
 
 def setup_logger():
-    """Sets up and returns a logger for tracking events."""
+    """
+    
+    Sets up and returns a logger for tracking events.
+
+    Returns:
+        Logger: The logger object.
+
+    """
 
     werkzeug_logger = logging.getLogger('werkzeug')
     werkzeug_logger.setLevel(logging.ERROR) 

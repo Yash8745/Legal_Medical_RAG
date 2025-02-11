@@ -24,6 +24,20 @@ def home():
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
+    """
+    File Upload Endpoint.
+
+    Expects a file to be included in the POST request with the key 'file'.
+    The file is saved to the FILE_PATH directory with its original filename.
+    A unique ID is generated and stored in the file_mappings dictionary.
+
+    Returns:
+        JSON response containing:
+            - A success message.
+            - The unique file ID.
+            - The original filename.
+        On error, returns a JSON error message with an appropriate HTTP status code.
+    """
     if 'file' not in request.files:
         return jsonify({'error': 'No file uploaded'}), 400
     
@@ -55,6 +69,19 @@ def upload_file():
 
 @app.route('/documents/<doc_id>', methods=['DELETE'])
 def delete_document(doc_id):
+    """
+    Document Deletion Endpoint.
+
+    Deletes a document using its unique identifier.
+    It retrieves the filename from the file_mappings dictionary and removes the file from the filesystem.
+
+    Args:
+        doc_id (str): The unique identifier for the document.
+
+    Returns:
+        JSON response confirming deletion if successful.
+        JSON error message with appropriate HTTP status code if the document is not found or an error occurs.
+    """
     try:
         # Get filename from mappings
         filename = file_mappings.get(doc_id)
@@ -80,6 +107,16 @@ def delete_document(doc_id):
 
 @app.route('/chat', methods=['POST'])
 def chat():
+    """
+    Chat/Summarize Endpoint.
+
+    Accepts a JSON payload containing a message. The message is logged,
+    and then the summarize_document function is invoked to process and summarize the documents
+    stored in the FILE_PATH directory. The summarization response is returned as JSON.
+
+    Returns:
+        JSON response containing the summarization result.
+    """
     data = request.json
     message = data.get('message', '')
     logger.info(f"Received message: {message}")

@@ -6,7 +6,21 @@ logger = setup_logger()
 
 def extract_text_from_pdf(file_path, chunk_size=2000, chunk_overlap=0):
 
-    """Loads and splits text from a PDF file."""
+    """
+    Loads and splits text from a PDF file.
+    
+    Args:
+        file_path (str): The path to the PDF file.
+        chunk_size (int): The size of the text chunks to split. Defaults to 2000.
+        chunk_overlap (int): The overlap between text chunks. Defaults to 0.
+    
+    Returns:
+        list: The extracted text.
+
+    Raises:
+        Exception: If an error occurs during text extraction
+    
+    """
     
     try:
         logger.info(f"Extracting text from PDF: {file_path}")

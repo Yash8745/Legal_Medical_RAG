@@ -18,7 +18,29 @@ os.environ["GOOGLE_API_KEY"] = GEMINI_API_KEY
 logger = setup_logger()
 
 def summarize_document(file_path):
-    """Extracts, clusters, and summarizes a document."""
+    """
+    
+    Extracts, clusters, and summarizes a document. 
+
+    Describe:
+    This function extracts text from a document, clusters the text, and summarizes the text using a language model.
+    The function uses the following steps:
+    1. Extract text from the document.
+    2. Cluster the text using embeddings.
+    3. Summarize the text using a language
+    model.
+
+    Args:
+        file_path (str): The path to the document to summarize.
+
+    Returns:
+        str: The summarized text.
+
+    Raises:
+        Exception: If an error occurs during summarization.
+
+
+    """
     try:
         logger.info("Starting document summarization process.")
         embeddings = get_embeddings_model()
