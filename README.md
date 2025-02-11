@@ -1,6 +1,7 @@
 # Legal/Medical Document RAG System
 
-A sophisticated document analysis system designed to process and summarize legal and medical documents using advanced NLP techniques and RAG (Retrieval Augmented Generation) architecture.
+## Overview
+The Legal/Medical Document RAG System is an intelligent document analysis platform that processes legal and medical PDFs using Retrieval-Augmented Generation (RAG). It provides intelligent summarization and analysis by leveraging modern NLP techniques, multiple LLM providers, and a React-based frontend.
 
 ## Features
 
@@ -10,13 +11,8 @@ A sophisticated document analysis system designed to process and summarize legal
 - **Multi-Model Support**: Compatible with multiple LLM providers (Groq, Google Gemini)
 - **Document Management**: Full document lifecycle management with upload and deletion capabilities
 
-## Tech Stack
 
-### Backend
-- Flask (Python web framework)
-- LangChain (LLM orchestration)
-- Hugging Face (Embeddings)
-- Multiple LLM providers (Groq, Google Gemini)
+## System Architecture
 
 ### Frontend
 - React 18
@@ -25,29 +21,78 @@ A sophisticated document analysis system designed to process and summarize legal
 - Vite
 - Lucide Icons
 
-## Project Structure
+#### Features:
+- Document upload and management
+- Dark/light mode toggle
+- Real-time chat interface
+- Document summary generation
+- Responsive UI with Tailwind CSS
+
+#### Structure:
+```
+Directory structure:
+└── yash8745-legal_medical_rag/
+    ├── README.md
+    ├── app.py
+    ├── requirements.txt
+    ├── test.py
+    ├── .env.example
+    ├── documentation/
+    │   └── idea.md
+    ├── frontend/
+    │   ├── eslint.config.js
+    │   ├── index.html
+    │   ├── package-lock.json
+    │   ├── package.json
+    │   ├── postcss.config.js
+    │   ├── tailwind.config.js
+    │   ├── tsconfig.app.json
+    │   ├── tsconfig.json
+    │   ├── tsconfig.node.json
+    │   ├── vite.config.ts
+    │   ├── .gitignore
+    │   ├── src/
+    │   │   ├── App.tsx
+    │   │   ├── index.css
+    │   │   ├── main.tsx
+    │   │   ├── vite-env.d.ts
+    │   │   └── api/
+    │   │       └── api.ts
+    │   └── .bolt/
+    │       ├── config.json
+    │       └── prompt
+    ├── logs/
+    │   └── .gitkeep
+    ├── model/
+    │   ├── cluster.py
+    │   ├── embedding.py
+    │   └── summarization.py
+    ├── notebooks/
+    │   ├── Gemini_Summary.ipynb
+    │   ├── RAG_SUMMARY_GRAPH.ipynb
+    │   └── Summary_KMeans_LLM.ipynb
+    ├── pipeline/
+    │   └── summarize_document.py
+    └── utils/
+        ├── data_ingestion_util.py
+        └── logger.py
 
 ```
-yash8745-legal_medical_rag/
-├── Backend (Flask)
-│   ├── app.py                 # Main Flask application
-│   ├── model/                 # ML model implementations
-│   ├── pipeline/              # Document processing pipeline
-│   └── utils/                 # Utility functions
-├── Frontend (React)
-│   └── frontend/             # React application
-└── Documentation
-    └── documentation/        # Detailed documentation
-```
 
-## Prerequisites
+#### Component Details:
+- File upload handling
+- Document management (upload/delete)
+- Chat interface
+- Dark mode toggle
+- Summary generation
 
-- Python 3.8+
-- Node.js 16+
-- API keys for:
-  - Groq
-  - Google Gemini
-  - Pinecone (for vector storage)
+### Backend
+- Flask (Python web framework)
+- LangChain (LLM orchestration)
+- Hugging Face (Embeddings)
+- Multiple LLM providers (Groq, Google Gemini)
+
+
 
 ## Quick Start
 
@@ -93,64 +138,6 @@ npm run dev
 - [Getting Started Guide](documentation/getting-started.md)
 - [Technical Documentation](documentation/technical.md)
 - [API Documentation](documentation/api.md)
-
-## Contributing
-
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-
-
----
-# Legal/Medical Document RAG System
-
-## Overview
-The Legal/Medical Document RAG System is an intelligent document analysis platform that processes legal and medical PDFs using Retrieval-Augmented Generation (RAG). It provides intelligent summarization and analysis by leveraging modern NLP techniques, multiple LLM providers, and a React-based frontend.
-
-## System Architecture
-
-### Frontend (React + TypeScript)
-#### Features:
-- Document upload and management
-- Dark/light mode toggle
-- Real-time chat interface
-- Document summary generation
-- Responsive UI with Tailwind CSS
-
-#### Structure:
-```
-frontend/
-  src/
-    App.tsx           // Main application component
-    api/api.ts        // API integration
-    main.tsx          // Application entry point
-```
-
-#### Component Details:
-- File upload handling
-- Document management (upload/delete)
-- Chat interface
-- Dark mode toggle
-- Summary generation
-
-### Backend (Flask)
-#### Core Components:
-```
-backend/
-  app.py                  # Main Flask application
-  model/
-    ├── cluster.py       # Text clustering
-    ├── embedding.py     # Document embeddings
-    └── summarization.py # Text summarization
-  pipeline/
-    └── summarize_document.py  # Main processing pipeline
-  utils/
-    ├── data_ingestion_util.py # PDF processing
-    └── logger.py             # Logging utilities
-```
 
 #### Processing Pipeline:
 1. **PDF Ingestion**
@@ -201,7 +188,6 @@ def summarize_texts(texts, llm, chain_type="stuff"):
 ```
 
 ## Dependencies
-
 ### Backend:
 ```plaintext
 Flask               # Web framework
@@ -216,7 +202,7 @@ google-genai        # Gemini AI integration
 ### Frontend:
 ```json
 {
-  "react": "^18.3.1",
+    "react": "^18.3.1",
   "typescript": "^5.5.3",
   "tailwindcss": "^3.4.1",
   "axios": "^1.7.9",
@@ -365,9 +351,9 @@ graph TB
         API --> |Log Events| Logger
     end
 
-    style Frontend fill:#f9f,stroke:#333,stroke-width:2px
-    style Backend fill:#bbf,stroke:#333,stroke-width:2px
-    style Pipeline fill:#bfb,stroke:#333,stroke-width:2px
-    style Models fill:#ff9,stroke:#333,stroke-width:2px
-    style Utils fill:#fbb,stroke:#333,stroke-width:2px
+    style Frontend fill:#f9f,stroke:#FFD700,stroke-width:2px
+    style Backend fill:#bbf,stroke:#FFD700,stroke-width:2px
+    style Pipeline fill:#bfb,stroke:#C0C0C0,stroke-width:2px
+    style Models fill:#ff9,stroke:#FFD700,stroke-width:2px
+    style Utils fill:#fbb,stroke:#FFD700,stroke-width:2px
 ```
