@@ -1,5 +1,7 @@
 # Legal/Medical Document RAG System ⚖️
-<img src="static/Legal-Medical%20Rag.png" alt="Banner" style="width: 100%;">
+
+<img src="static/Legal-Medical Rag (1).png" alt="Banner" style="width: 100%;">
+
 ## Overview
 The **Legal/Medical Document RAG System** is an **AI-driven** platform that processes legal and medical PDFs using **Retrieval-Augmented Generation (RAG)**. It leverages cutting-edge **NLP** and multiple **LLM providers** for intelligent summarization and interactive analysis. The **React-based frontend** enables smooth document management, while the **Flask backend** efficiently handles text extraction, embeddings, clustering, and summarization.
 
@@ -157,7 +159,7 @@ Directory structure:
         └── logger.py
 ```
 
-## 🏗️ Tech Stack  
+## Tech Stack 🏗️  
 
 ### 🌐 Frontend  
 - **React 18** – Modern UI development  
