@@ -8,4 +8,5 @@
 ## To do 
 - [x] fix fronteend
 - [x] check for timeline and citation in summary 
+- [x] create get stared documenation and technical documentation
 
