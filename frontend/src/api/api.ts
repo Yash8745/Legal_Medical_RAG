@@ -17,25 +17,15 @@ export const uploadFile = async (file: File) => {
   }
 };
 
-// export const fetchDocuments = async () => {
-//   try {
-//     const response = await axios.get(`${API_BASE_URL}/documents`);
-//     return response.data;
-//   } catch (error) {
-//     console.error('Error fetching documents:', error);
-//     throw error;
-//   }
-// };
-
-// export const getSummary = async (docId: string) => {
-//   try {
-//     const response = await axios.get(`${API_BASE_URL}/summary/${docId}`);
-//     return response.data;
-//   } catch (error) {
-//     console.error('Error fetching summary:', error);
-//     throw error;
-//   }
-// };
+export const deleteDocument = async (docId: string) => {
+  try {
+    const response = await axios.delete(`${API_BASE_URL}/documents/${docId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting document:', error);
+    throw error;
+  }
+};
 
 export const sendMessage = async (message: string) => {
   try {

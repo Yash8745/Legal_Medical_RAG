@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { uploadFile, sendMessage } from './api/api';
+import { uploadFile, sendMessage, deleteDocument } from './api/api';
 
 import {
   FileUp,
@@ -12,13 +12,13 @@ import {
   Plus,
   ChevronRight,
   Moon,
-  Sun
+  Sun,
+  Trash2
 } from 'lucide-react';
 
 interface Document {
   id: string;
   name: string;
-  selected: boolean;
 }
 
 interface ChatMessage {
@@ -30,48 +30,47 @@ interface ChatMessage {
 
 function App() {
   const [documents, setDocuments] = useState<Document[]>([]);
-  const [inputMessage, setInputMessage] = useState(''); // no longer used for sending messages
   const [darkMode, setDarkMode] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [showMainContent, setShowMainContent] = useState(true);
   const chatEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Auto-scroll to the bottom whenever messages change
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-
+  
     if (file && file.type === 'application/pdf') {
-      const response = await uploadFile(file);
-      console.log("Upload successful:", response);
-
-      const newDoc: Document = {
-        id: Math.random().toString(36).substr(2, 9),
-        name: file.name,
-        selected: true,
-      };
-      setDocuments([...documents, newDoc]);
-    }
-  };
-
-  // Existing function for sending a message (retained for reference)
-  const handleSendMessage = async () => {
-    if (inputMessage.trim()) {
       try {
-        const response = await sendMessage(inputMessage);
-        console.log('Message sent successfully:', response);
-        // Optionally, update your UI or state based on the response
+        const response = await uploadFile(file);
+        console.log("Upload successful:", response);
+  
+        const newDoc: Document = {
+          id: response.id, // Use the ID from the server
+          name: file.name,
+        };
+        setDocuments([...documents, newDoc]);
       } catch (error) {
-        console.error('Error sending message:', error);
+        console.error('Error uploading file:', error);
       }
-      setInputMessage('');
     }
   };
 
-  // Updated function for the Briefing Doc button with loading and summary display
+  const handleDeleteDocument = async (id: string) => {
+    try {
+      await deleteDocument(id);
+      setDocuments(docs => docs.filter(doc => doc.id !== id));
+    } catch (error) {
+      console.error('Error deleting document:', error);
+    }
+  };
+
   const handleBriefingDoc = async () => {
+    // Hide the main content
+    setShowMainContent(false);
+    
     // Add a loading message to the chat
     const loadingMessageId = Math.random().toString(36).substr(2, 9);
     setMessages(prev => [
@@ -80,21 +79,17 @@ function App() {
     ]);
 
     try {
-      // Call the API to get the summary
       const response = await sendMessage("briefing doc");
-      // Extract a string from the response: check for "response" then "summary"
       const summaryText =
         typeof response === "string"
           ? response
           : response.response || response || "No summary available.";
 
-      // Update the loading message with the summary text
       setMessages(prev =>
         prev.map(msg =>
           msg.id === loadingMessageId ? { ...msg, content: summaryText, loading: false } : msg
         )
       );
-      console.log('Briefing Doc API request sent successfully:', response);
     } catch (error) {
       console.error('Error sending Briefing Doc request:', error);
       setMessages(prev =>
@@ -103,14 +98,6 @@ function App() {
         )
       );
     }
-  };
-
-  const toggleDocument = (id: string) => {
-    setDocuments(docs =>
-      docs.map(doc =>
-        doc.id === id ? { ...doc, selected: !doc.selected } : doc
-      )
-    );
   };
 
   const toggleDarkMode = () => setDarkMode(!darkMode);
@@ -162,15 +149,18 @@ function App() {
                     : 'border-gray-100'
                 }`}
               >
-                <input
-                  type="checkbox"
-                  checked={doc.selected}
-                  onChange={() => toggleDocument(doc.id)}
-                  className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                />
                 <FileText className={`w-5 h-5 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`} />
                 <span className={`flex-1 truncate ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{doc.name}</span>
-                <ChevronRight className={`w-4 h-4 ${darkMode ? 'text-gray-500' : 'text-gray-400'} opacity-0 group-hover:opacity-100 transition-opacity`} />
+                <button
+                  onClick={() => handleDeleteDocument(doc.id)}
+                  className={`p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity ${
+                    darkMode 
+                      ? 'hover:bg-gray-600 text-gray-400 hover:text-red-400' 
+                      : 'hover:bg-gray-200 text-gray-500 hover:text-red-500'
+                  }`}
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
               </div>
             ))}
           </div>
@@ -179,51 +169,52 @@ function App() {
 
       {/* Right Panel - Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
-        <div className={`p-8 ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
-          <div className="max-w-3xl mx-auto">
-            <div className={`flex flex-col items-center p-8 rounded-2xl shadow-lg mb-8 ${
-              darkMode ? 'bg-gray-700/50' : 'bg-white'
-            }`}>
-              <FileText className={`w-16 h-16 ${darkMode ? 'text-blue-400' : 'text-blue-600'} mb-4`} />
-              <h1 className={`text-2xl font-bold text-center ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                Mark Chandler: Implant Records and Medical History
-              </h1>
-            </div>
+        {showMainContent ? (
+          <div className={`p-8 ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
+            <div className="max-w-3xl mx-auto">
+              <div className={`flex flex-col items-center p-8 rounded-2xl shadow-lg mb-8 ${
+                darkMode ? 'bg-gray-700/50' : 'bg-white'
+              }`}>
+                <FileText className={`w-16 h-16 ${darkMode ? 'text-blue-400' : 'text-blue-600'} mb-4`} />
+                <h1 className={`text-2xl font-bold text-center ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                  Mark Chandler: Implant Records and Medical History
+                </h1>
+              </div>
 
-            <div className={`rounded-xl p-6 mb-8 ${
-              darkMode ? 'bg-gray-700/50' : 'bg-gray-50'
-            }`}>
-              <p className={`leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                This document contains detailed medical records and implant history for Mark Chandler,
-                including procedures performed, dates, and relevant medical observations. The records
-                span from 2020 to present day.
-              </p>
-            </div>
+              <div className={`rounded-xl p-6 mb-8 ${
+                darkMode ? 'bg-gray-700/50' : 'bg-gray-50'
+              }`}>
+                <p className={`leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                  This document contains detailed medical records and implant history for Mark Chandler,
+                  including procedures performed, dates, and relevant medical observations. The records
+                  span from 2020 to present day.
+                </p>
+              </div>
 
-            <div className="flex flex-wrap gap-3 mb-8">
-              {[
-                { icon: Pin, label: 'Save to Note' },
-                { icon: MessageSquare, label: 'Add Note' },
-                { icon: Volume2, label: 'Audio Overview' },
-                { icon: FileDown, label: 'Briefing Doc' }
-              ].map(({ icon: Icon, label }) => (
-                <button
-                  key={label}
-                  // For "Briefing Doc", attach the new handler that shows a loading bubble and then updates it with the summary.
-                  onClick={label === 'Briefing Doc' ? handleBriefingDoc : undefined}
-                  className={`flex items-center gap-2 px-5 py-3 rounded-lg transition-all hover:scale-[1.02] ${
-                    darkMode
-                      ? 'bg-gray-700 hover:bg-gray-600 text-gray-200'
-                      : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
-                  } shadow-sm`}
-                >
-                  <Icon className="w-4 h-4" />
-                  <span className="font-medium">{label}</span>
-                </button>
-              ))}
+              <div className="flex flex-wrap gap-3 mb-8">
+                {[
+                  { icon: Pin, label: 'Save to Note' },
+                  { icon: MessageSquare, label: 'Add Note' },
+                  { icon: Volume2, label: 'Audio Overview' },
+                  { icon: FileDown, label: 'Briefing Doc' }
+                ].map(({ icon: Icon, label }) => (
+                  <button
+                    key={label}
+                    onClick={label === 'Briefing Doc' ? handleBriefingDoc : undefined}
+                    className={`flex items-center gap-2 px-5 py-3 rounded-lg transition-all hover:scale-[1.02] ${
+                      darkMode
+                        ? 'bg-gray-700 hover:bg-gray-600 text-gray-200'
+                        : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+                    } shadow-sm`}
+                  >
+                    <Icon className="w-4 h-4" />
+                    <span className="font-medium">{label}</span>
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        ) : null}
 
         {/* Chat messages panel */}
         <div className={`flex-1 overflow-y-auto p-8 ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
@@ -240,40 +231,6 @@ function App() {
             <div ref={chatEndRef} />
           </div>
         </div>
-
-        {/*
-        // Commented out the chat input area with text field and Send button
-        <div className={`p-8 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-t`}>
-          <div className="max-w-3xl mx-auto">
-            <div className="flex gap-3">
-              <input
-                type="text"
-                value={inputMessage}
-                onChange={(e) => setInputMessage(e.target.value)}
-                placeholder="Start typing..."
-                className={`flex-1 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
-                  darkMode
-                    ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400'
-                    : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
-                }`}
-                onKeyPress={(e) => {
-                  if (e.key === 'Enter') {
-                    e.preventDefault();
-                    handleSendMessage();
-                  }
-                }}
-              />
-              <button
-                onClick={handleSendMessage}
-                className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all hover:scale-[1.02] shadow-sm flex items-center gap-2"
-              >
-                <Send className="w-4 h-4" />
-                <span className="font-medium">Send</span>
-              </button>
-            </div>
-          </div>
-        </div>
-        */}
       </div>
     </div>
   );
