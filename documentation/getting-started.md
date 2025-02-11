@@ -115,3 +115,28 @@ The frontend will be available at `http://localhost:5173`
 - Review the [Technical Documentation](technical.md) for in-depth understanding
 - Explore the notebooks in the `notebooks/` directory for example implementations
 - Check out the [API Documentation](api.md) for backend endpoints details
+
+
+
+## Environment Configuration
+```plaintext
+GROQ_API_KEY=''        # Groq API access
+PINECONE_API_KEY=''    # Pinecone vector DB
+GEMINI_API_KEY=''      # Google Gemini AI
+```
+## Running the System
+
+### Backend Setup:
+```bash
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python app.py
+```
+
+### Frontend Setup:
+```bash
+cd frontend
+npm install
+npm run dev
+```

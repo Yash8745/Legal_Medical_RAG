@@ -171,3 +171,88 @@ Built with React and TypeScript, following modern best practices:
    - Local processing
    - No permanent storage
    - Secure transmission
+
+
+
+#### Processing Pipeline:
+1. **PDF Ingestion**
+```python
+def extract_text_from_pdf(file_path, chunk_size=2000, chunk_overlap=0):
+    loader = DirectoryLoader(file_path, glob="*.pdf", loader_cls=PyPDFLoader)
+    pages = loader.load()
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=chunk_size, chunk_overlap=chunk_overlap
+    )
+    return text_splitter.split_documents(pages)
+```
+2. **Embedding Generation**
+```python
+def get_embeddings_model(model_name="BAAI/bge-base-en-v1.5", device="cuda"):
+    encode_kwargs = {"normalize_embeddings": True}
+    return HuggingFaceBgeEmbeddings(
+        model_name=model_name,
+        encode_kwargs=encode_kwargs
+    )
+```
+3. **Text Clustering**
+```python
+def cluster_texts(texts, embeddings, num_clusters=5):
+    filter = EmbeddingsClusteringFilter(
+        embeddings=embeddings,
+        num_clusters=num_clusters
+    )
+    return filter.transform_documents(documents=texts)
+```
+4. **Summarization**
+```python
+def summarize_texts(texts, llm, chain_type="stuff"):
+    checker_chain = load_summarize_chain(llm, chain_type=chain_type)
+    return checker_chain.run(texts)
+```
+
+
+## Dependencies
+### Backend:
+```plaintext
+Flask               # Web framework
+flask_cors          # CORS support
+langchain           # LLM orchestration
+transformers        # ML models
+pinecone            # Vector storage
+unstructured        # PDF processing
+google-genai        # Gemini AI integration
+```
+
+### Frontend:
+```json
+{
+    "react": "^18.3.1",
+  "typescript": "^5.5.3",
+  "tailwindcss": "^3.4.1",
+  "axios": "^1.7.9",
+  "lucide-react": "^0.344.0"
+}
+```
+
+## Key Implementation Details
+
+1. **Document Processing**
+   - Uses PyPDFLoader for text extraction
+   - Implements chunk-based processing for large documents
+   - Maintains document state using unique IDs
+
+2. **AI Integration**
+   - Supports multiple LLM providers (Groq, Google Gemini)
+   - Uses HuggingFace embeddings for semantic analysis
+   - Implements clustering for improved summarization
+
+3. **Frontend Features**
+   - Real-time file upload with progress
+   - Document management interface
+   - Chat-based interaction with AI
+   - Responsive design with dark mode
+
+4. **Security**
+   - API key management via environment variables
+   - Input validation and sanitization
+   - Secure file handling

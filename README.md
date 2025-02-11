@@ -1,305 +1,66 @@
-# Legal/Medical Document RAG System
-
+# Legal/Medical Document RAG System ⚖️
+<img src="static/Legal-Medical%20Rag.png" alt="Banner" style="width: 100%;">
 ## Overview
-The Legal/Medical Document RAG System is an intelligent document analysis platform that processes legal and medical PDFs using Retrieval-Augmented Generation (RAG). It provides intelligent summarization and analysis by leveraging modern NLP techniques, multiple LLM providers, and a React-based frontend.
+The **Legal/Medical Document RAG System** is an **AI-driven** platform that processes legal and medical PDFs using **Retrieval-Augmented Generation (RAG)**. It leverages cutting-edge **NLP** and multiple **LLM providers** for intelligent summarization and interactive analysis. The **React-based frontend** enables smooth document management, while the **Flask backend** efficiently handles text extraction, embeddings, clustering, and summarization.
+
+Designed for scalability 🚀, the system supports multiple PDFs with up to **20K+ pages**. It integrates **Hugging Face embeddings**, LLM-based summarization, and a modular API for seamless document processing. **Security** 🔒 is ensured through API key management and secure file handling, making it adaptable for future LLM integrations.
 
 ## Features
-
-- **PDF Document Processing**: Upload and analyze PDF documents with automatic text extraction
-- **Intelligent Summarization**: Utilizes clustering and state-of-the-art language models for comprehensive document summarization
-- **Modern Web Interface**: Responsive React-based frontend with dark mode support
-- **Multi-Model Support**: Compatible with multiple LLM providers (Groq, Google Gemini)
-- **Document Management**: Full document lifecycle management with upload and deletion capabilities
-
-
-## System Architecture
-
-### Frontend
-- React 18
-- TypeScript
-- Tailwind CSS
-- Vite
-- Lucide Icons
-
-#### Features:
-- Document upload and management
-- Dark/light mode toggle
-- Real-time chat interface
-- Document summary generation
-- Responsive UI with Tailwind CSS
-
-#### Structure:
-```
-Directory structure:
-└── yash8745-legal_medical_rag/
-    ├── README.md
-    ├── app.py
-    ├── requirements.txt
-    ├── test.py
-    ├── .env.example
-    ├── documentation/
-    │   └── idea.md
-    ├── frontend/
-    │   ├── eslint.config.js
-    │   ├── index.html
-    │   ├── package-lock.json
-    │   ├── package.json
-    │   ├── postcss.config.js
-    │   ├── tailwind.config.js
-    │   ├── tsconfig.app.json
-    │   ├── tsconfig.json
-    │   ├── tsconfig.node.json
-    │   ├── vite.config.ts
-    │   ├── .gitignore
-    │   ├── src/
-    │   │   ├── App.tsx
-    │   │   ├── index.css
-    │   │   ├── main.tsx
-    │   │   ├── vite-env.d.ts
-    │   │   └── api/
-    │   │       └── api.ts
-    │   └── .bolt/
-    │       ├── config.json
-    │       └── prompt
-    ├── logs/
-    │   └── .gitkeep
-    ├── model/
-    │   ├── cluster.py
-    │   ├── embedding.py
-    │   └── summarization.py
-    ├── notebooks/
-    │   ├── Gemini_Summary.ipynb
-    │   ├── RAG_SUMMARY_GRAPH.ipynb
-    │   └── Summary_KMeans_LLM.ipynb
-    ├── pipeline/
-    │   └── summarize_document.py
-    └── utils/
-        ├── data_ingestion_util.py
-        └── logger.py
-
-```
-
-#### Component Details:
-- File upload handling
-- Document management (upload/delete)
-- Chat interface
-- Dark mode toggle
-- Summary generation
-
-### Backend
-- Flask (Python web framework)
-- LangChain (LLM orchestration)
-- Hugging Face (Embeddings)
-- Multiple LLM providers (Groq, Google Gemini)
-
-
+- **PDF Document Processing**: Upload and analyze PDF documents with **20K+ pages** and generate comprehensive summaries 📄.
+- **Intelligent Summarization**: Utilizes clustering and state-of-the-art language models for in-depth document summarization.
+- **Modern Web Interface**: Responsive React-based frontend with **dark mode support**.
+- **Multi-Model Support**: Compatible with multiple LLM providers (**Groq**, **Google Gemini**, **LangChain**).
+- **Document Management**: Full lifecycle management including upload and deletion capabilities.
 
 ## Quick Start
 
-1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/yash8745-legal_medical_rag.git
-cd yash8745-legal_medical_rag
-```
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Yash8745/Legal_Medical_RAG.git
+   cd Legal_Medical_RAG
+   ```
 
-2. Set up backend:
-```bash
-# Create and activate virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+2. **Set up the backend with conda:**
+   - **Create and activate a conda environment:**
+     ```bash
+     conda create -n legal_medical_rag python=3.10
+     conda activate legal_medical_rag
+     ```
+   - **Install backend dependencies:**
+     ```bash
+     pip install -r requirements.txt
+     ```
+   - **Set up environment variables:**
+     ```bash
+     cp .env.example .env
+     ```
+     Edit the newly created `.env` file to include your API keys:
+     - `GEMINI_API_KEY`
+     - `GROQ_API_KEY`
+     - `PINECONE_API_KEY`
+     
+   - **Google Cloud CLI Setup:**
+     Ensure you have the **Google Cloud CLI** installed and configured on your computer. Generate authentication credentials by following the official [Google Cloud SDK documentation](https://cloud.google.com/sdk/docs/install).
 
-# Install dependencies
-pip install -r requirements.txt
+3. **Set up the frontend:**
+   - Navigate to the **frontend** directory and install dependencies while starting the development server:
+     ```bash
+     cd frontend
+     npm install && npm run dev
+     ```
 
-# Set up environment variables
-cp .env.example .env
-# Edit .env with your API keys
-```
+4. **Access the application:**
+   Open your web browser and visit [http://localhost:5173](http://localhost:5173) to view the application.
 
-3. Set up frontend:
-```bash
-cd frontend
-npm install
-```
-
-4. Start the services:
-```bash
-# Start backend (in project root)
-python app.py
-
-# Start frontend (in frontend directory)
-npm run dev
-```
-
-5. Access the application at `http://localhost:5173`
-
-## Documentation
-
-- [Getting Started Guide](documentation/getting-started.md)
-- [Technical Documentation](documentation/technical.md)
-- [API Documentation](documentation/api.md)
-
-#### Processing Pipeline:
-1. **PDF Ingestion**
-```python
-def extract_text_from_pdf(file_path, chunk_size=2000, chunk_overlap=0):
-    loader = DirectoryLoader(file_path, glob="*.pdf", loader_cls=PyPDFLoader)
-    pages = loader.load()
-    text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=chunk_size, chunk_overlap=chunk_overlap
-    )
-    return text_splitter.split_documents(pages)
-```
-2. **Embedding Generation**
-```python
-def get_embeddings_model(model_name="BAAI/bge-base-en-v1.5", device="cuda"):
-    encode_kwargs = {"normalize_embeddings": True}
-    return HuggingFaceBgeEmbeddings(
-        model_name=model_name,
-        encode_kwargs=encode_kwargs
-    )
-```
-3. **Text Clustering**
-```python
-def cluster_texts(texts, embeddings, num_clusters=5):
-    filter = EmbeddingsClusteringFilter(
-        embeddings=embeddings,
-        num_clusters=num_clusters
-    )
-    return filter.transform_documents(documents=texts)
-```
-4. **Summarization**
-```python
-def summarize_texts(texts, llm, chain_type="stuff"):
-    checker_chain = load_summarize_chain(llm, chain_type=chain_type)
-    return checker_chain.run(texts)
-```
-
-### API Endpoints
-```python
-@app.route('/upload', methods=['POST'])
-# Handles PDF file uploads and returns file ID and status
-
-@app.route('/documents/<doc_id>', methods=['DELETE'])
-# Deletes specified document and manages file storage
-
-@app.route('/chat', methods=['POST'])
-# Processes document summarization requests and returns AI-generated summaries
-```
-
-## Dependencies
-### Backend:
-```plaintext
-Flask               # Web framework
-flask_cors          # CORS support
-langchain           # LLM orchestration
-transformers        # ML models
-pinecone            # Vector storage
-unstructured        # PDF processing
-google-genai        # Gemini AI integration
-```
-
-### Frontend:
-```json
-{
-    "react": "^18.3.1",
-  "typescript": "^5.5.3",
-  "tailwindcss": "^3.4.1",
-  "axios": "^1.7.9",
-  "lucide-react": "^0.344.0"
-}
-```
-
-## Key Implementation Details
-
-1. **Document Processing**
-   - Uses PyPDFLoader for text extraction
-   - Implements chunk-based processing for large documents
-   - Maintains document state using unique IDs
-
-2. **AI Integration**
-   - Supports multiple LLM providers (Groq, Google Gemini)
-   - Uses HuggingFace embeddings for semantic analysis
-   - Implements clustering for improved summarization
-
-3. **Frontend Features**
-   - Real-time file upload with progress
-   - Document management interface
-   - Chat-based interaction with AI
-   - Responsive design with dark mode
-
-4. **Security**
-   - API key management via environment variables
-   - Input validation and sanitization
-   - Secure file handling
-
-## Environment Configuration
-```plaintext
-GROQ_API_KEY=''        # Groq API access
-PINECONE_API_KEY=''    # Pinecone vector DB
-GEMINI_API_KEY=''      # Google Gemini AI
-```
-
-## Running the System
-
-### Backend Setup:
-```bash
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-python app.py
-```
-
-### Frontend Setup:
-```bash
-cd frontend
-npm install
-npm run dev
-```
 
 ## Project Workflow
-1. User uploads a PDF document.
-2. The system processes the document through a pipeline:
-   - Text extraction
-   - Embedding generation
-   - Clustering
-   - Summarization
-3. User receives an interactive summary.
-4. Supports follow-up questions and analysis.
-
-## Extension Points
-1. **Additional LLM Providers**
-   - Architecture supports new LLM integration.
-   - Modular design for model switching.
-
-2. **Enhanced Processing**
-   - Support for additional document types.
-   - Custom preprocessing pipelines.
-   - Advanced clustering algorithms.
-
-3. **Frontend Features**
-   - Additional visualization options.
-   - Enhanced document management.
-   - Custom summarization options.
-
-## Notes for AI Implementation
-- The system employs a RAG architecture for improved accuracy.
-- Document processing is modular and extensible.
-- Frontend and backend are loosely coupled.
-- Environment variables are required for API access.
-- The system supports both CPU and GPU operations.
-- Logging is implemented throughout the pipeline.
-- Error handling ensures graceful degradation.
-- Designed for legal/medical document processing but adaptable for other domains.
-
-## License
-This project is licensed under the MIT License.
-
-## Contributors
-- **[Your Name]** - Developer & Architect
-
-## Contact
-For inquiries or collaborations, please reach out to **[Your Email]**.
+1. **Upload:** User uploads a PDF document.
+2. **Processing:** The system processes the document through a pipeline:
+   - **Text Extraction**
+   - **Embedding Generation**
+   - **Clustering**
+   - **Summarization**
+3. **Output:** User receives an interactive summary with follow-up capabilities for further analysis.
 
 ```mermaid
 %%{init: {'theme': 'default', 'themeVariables': { 'background': '#ffffff', 'textColor': '#000000' }}}%%
@@ -357,3 +118,84 @@ graph TB
     style Models fill:#ff9,stroke:#FFD700,stroke-width:2px
     style Utils fill:#fbb,stroke:#FFD700,stroke-width:2px
 ```
+
+## System Architecture
+
+#### Directory Structure:
+```
+Directory structure:
+└── yash8745-legal_medical_rag/
+    ├── README.md                    # Project overview and instructions
+    ├── app.py                       # Main Flask application handling API routes
+    ├── requirements.txt             # Python dependencies
+    ├── test.py                      # Script for testing backend functionality
+    ├── documentation/               # Detailed project documentation
+    │   ├── idea.md
+    │   ├── api.md
+    │   ├── getting-started.md
+    │   ├── technical.md
+    ├── frontend/                   # Frontend source code
+    │   ├── index.html
+    │   ├── src/
+    │   │   ├── App.tsx             # Main React component
+    │   │   └── api/
+    │   │       └── api.ts          # Handles API calls
+    ├── logs/                       # Application logs
+    │   ├── app.log
+    ├── model/                      # ML models and processing modules
+    │   ├── cluster.py
+    │   ├── embedding.py
+    │   └── summarization.py
+    ├── notebooks/                  # Jupyter notebooks for experiments and visualizations
+    │   ├── Gemini_Summary.ipynb
+    │   ├── RAG_SUMMARY_GRAPH.ipynb
+    │   └── Summary_KMeans_LLM.ipynb
+    ├── pipeline/                   # Document processing pipeline
+    │   └── summarize_document.py
+    └── utils/                      # Utility scripts and logging
+        ├── data_ingestion_util.py
+        └── logger.py
+```
+
+## 🏗️ Tech Stack  
+
+### 🌐 Frontend  
+- **React 18** – Modern UI development  
+- **TypeScript** – Type-safe JavaScript  
+- **Tailwind CSS** – Utility-first styling  
+- **Vite** – Fast frontend bundler  
+- **Lucide Icons** – Lightweight icon library  
+
+### 🖥️ Backend  
+- **Flask** – Python web framework  
+- **LangChain** – LLM orchestration  
+- **Hugging Face** – Text embeddings  
+- **Multiple LLM Providers** – **Groq**, **Google Gemini**
+
+## Documentation
+
+For a comprehensive understanding of the project, refer to our detailed documentation:
+
+- **[Getting Started Guide](documentation/getting-started.md):** Provides step-by-step instructions for setting up the project, from installation to running the initial version. It’s the perfect starting point for new users.
+- **[Technical Documentation](documentation/technical.md):** Dive into the system’s architecture and design decisions. This section covers the project structure, core modules, and the technologies powering the system.
+- **[API Documentation](documentation/api.md):** Explore the available API endpoints, learn about request/response formats, and review integration examples. Essential reading for developers looking to extend or integrate with the system.
+
+
+## License
+
+This project is licensed under the BSD 3-Clause License. Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+- Redistributions of source code must retain the above copyright notice, this list of conditions,
+and the following disclaimer.
+
+- Redistributions in binary form must reproduce the above copyright notice, this list of conditions,
+and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+- Neither the name of the project nor the names of its contributors may be used to endorse or promote products
+derived from this software without specific prior written permission.
+
+Please credit **Yash Narang** for any use or redistribution of this project.
+
+## Contact
+For any questions, please reach out to Yash Narang at **narangyash32@gmail.com**.
+
