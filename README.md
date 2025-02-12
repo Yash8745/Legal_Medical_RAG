@@ -183,6 +183,8 @@ For a comprehensive understanding of the project, refer to our detailed document
 - **[API Documentation](documentation/api.md):** Explore the available API endpoints, learn about request/response formats, and review integration examples. Essential reading for developers looking to extend or integrate with the system.
 - **[Idea and Concept](documentation/idea.md):** Discover the initial concept, research, and design process behind the Legal/Medical Document RAG System.
 
+## Contributions  
+Check **[To-Do](documentation/todo.md):** to find areas where you can contribute or identify missing components. 🚀
 
 ## License
 
