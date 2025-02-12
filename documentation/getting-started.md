@@ -154,6 +154,7 @@ The frontend will be available at `http://localhost:5173`.
 
 ## Next Steps 👉
 
+- See the [Idea and Methodology](idea.md) behind the project.
 - Review the [Technical Documentation](technical.md) for an in-depth understanding.
 - Explore the notebooks in the `notebooks/` directory for example implementations.
 - Check out the [API Documentation](api.md) for backend endpoint details.
