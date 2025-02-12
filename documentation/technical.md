@@ -1,117 +1,175 @@
-# Technical Documentation
 
-## Architecture Overview
+# **<span style="font-size:1.2em;">Technical Documentation</span>**
 
-The Legal/Medical Document RAG System implements a sophisticated document processing pipeline using modern NLP techniques and a RAG (Retrieval Augmented Generation) architecture.
+This document provides an in-depth look at the **<span style="color:#1E90FF;">Legal/Medical Document RAG System</span>**, covering its architecture, core components, and implementation details. It also includes suggestions and best practices for improving performance, scalability, and security.
 
-### High-Level Architecture
 
+
+## **<span style="font-size:1.1em;">Architecture Overview</span>**
+
+The system implements a **<span style="color:#1E90FF;">document processing pipeline</span>** using modern NLP techniques, including:
+
+- **K-Means Clustering:**  
+  Groups similar document segments using K-Means, which helps in identifying and isolating core themes across large datasets.
+
+- **Mapping:**  
+  Associates each cluster with key topics or themes, ensuring that the most relevant information is captured for summarization.
+
+- **Iterative Refining:**  
+  Applies an iterative process to continuously refine the summaries, enhancing clarity and ensuring that all crucial details are retained.
+
+
+### **High-Level Architecture**
+
+```mermaid
+flowchart LR
+  A["Frontend (React)"]
+  B["Backend (Flask)"]
+  C["LLM Services"]
+  D["Embedding Models"]
+  E["Document Processing"]
+
+  A <--> B
+  B <--> C
+  B <--> D
+  B <--> E
 ```
-[Frontend (React)] <-> [Backend (Flask)] <-> [LLM Services]
-                                       <-> [Embedding Models]
-                                       <-> [Document Processing]
-```
 
-## Core Components
+- **Frontend (React):** Handles user interactions, file uploads, and displays summaries.
+- **Backend (Flask):** Receives and processes requests, orchestrates document processing, and communicates with external services.
+- **LLM Services:** Multiple Large Language Models (LLMs) for text summarization and analysis.
+- **Embedding Models:** Used for generating semantic embeddings, crucial for clustering and search.
+- **Document Processing:** Manages text extraction, chunking, clustering, and other transformations.
 
-### 1. Document Processing Pipeline
+
+
+## **<span style="font-size:1.1em;">Core Components</span>**
+
+### 1. **Document Processing Pipeline**
 
 The system processes documents through several stages:
 
-1. **Text Extraction** (`utils/data_ingestion_util.py`)
-   - Uses PyPDFLoader for PDF parsing
-   - Implements RecursiveCharacterTextSplitter for chunk management
-   - Handles large documents through streaming
+1. **<span style="color:#1E90FF;">Text Extraction</span>** (`utils/data_ingestion_util.py`)  
+   - Uses **PyPDFLoader** for PDF parsing.  
+   - Implements **RecursiveCharacterTextSplitter** for chunk management.  
+   - Handles large documents via streaming to manage memory effectively.
 
-2. **Embedding Generation** (`model/embedding.py`)
-   - Uses HuggingFaceBgeEmbeddings
-   - Model: "BAAI/bge-base-en-v1.5"
-   - Optimized for semantic understanding
+2. **<span style="color:#1E90FF;">Embedding Generation</span>** (`model/embedding.py`)  
+   - Uses **HuggingFaceBgeEmbeddings**.  
+   - Model: **"BAAI/bge-base-en-v1.5"**.  
+   - Optimized for **semantic understanding** of text.
 
-3. **Text Clustering** (`model/cluster.py`)
-   - Implements EmbeddingsClusteringFilter
-   - Groups similar content for better summarization
-   - Configurable number of clusters
+3. **<span style="color:#1E90FF;">Text Clustering</span>** (`model/cluster.py`)  
+   - Implements **EmbeddingsClusteringFilter**.  
+   - Groups similar content for **improved summarization**.  
+   - Allows a configurable number of clusters.
 
-4. **Summarization** (`model/summarization.py`)
-   - Supports multiple LLM providers
-   - Implements different summarization strategies
-   - Handles context management
+4. **<span style="color:#1E90FF;">Summarization</span>** (`model/summarization.py`)  
+   - Supports multiple **LLM providers**.  
+   - Implements **different summarization strategies** (e.g., STUFF, Map-Reduce, etc.).  
+   - Handles **context management** to fit within model token limits.
 
-### 2. Language Models
+### 2. **Language Models**
 
-The system supports multiple LLM providers:
+The system supports multiple **<span style="color:#1E90FF;">LLM providers</span>**:
 
-1. **Groq Integration**
-   - Model: llama3-8b-8192
-   - Optimized for speed and accuracy
-   - Used for detailed analysis
+1. **Groq Integration**  
+   - Model: **llama3-8b-8192**  
+   - Optimized for **speed** and **accuracy**  
+   - Suitable for **detailed analysis**
 
-2. **Google Gemini Integration**
-   - Model: gemini-2.0-flash
-   - Excellent for general summarization
-   - Strong multilingual support
+2. **Google Gemini Integration**  
+   - Model: **gemini-2.0-flash**  
+   - Excellent for **general summarization**  
+   - Provides strong **multilingual** capabilities
 
-### 3. Frontend Architecture
+### 3. **Frontend Architecture**
 
-Built with React and TypeScript, following modern best practices:
+Built with **React** and **TypeScript**, following modern best practices:
 
-1. **State Management**
-   - React Hooks for local state
-   - Custom hooks for business logic
-   - Efficient document management
+1. **State Management**  
+   - React Hooks for local state  
+   - Custom hooks for business logic  
+   - Efficient document and summary management
 
-2. **UI Components**
-   - Tailwind CSS for styling
-   - Lucide icons for consistent design
-   - Dark mode support
+2. **UI Components**  
+   - **Tailwind CSS** for styling  
+   - **Lucide Icons** for a consistent look  
+   - **Dark mode** support for better user experience
 
-3. **API Integration**
-   - Axios for HTTP requests
-   - Error handling middleware
-   - File upload management
+3. **API Integration**  
+   - **Axios** for HTTP requests  
+   - Error handling middleware  
+   - **File upload** management with progress tracking
 
-## Key Technologies
 
-### Backend Technologies
+### **System Flow (Sequence Diagram)**
 
-1. **Flask**
-   - Lightweight web framework
-   - CORS support
-   - File handling capabilities
+```mermaid
+sequenceDiagram
+    actor User
+    participant UI as React Frontend
+    participant API as Flask Backend
+    participant FileSystem as File Storage
+    participant Pipeline as Summary Pipeline
+    participant LLM as AI Models
 
-2. **LangChain**
-   - LLM orchestration
-   - Document processing
-   - Chain management
+    User->>UI: Upload PDF
+    UI->>API: POST /upload
+    API->>FileSystem: Save PDF
+    FileSystem-->>API: File ID
+    API-->>UI: Upload Success
 
-3. **Hugging Face**
-   - Embedding models
-   - Tokenization
-   - Model management
+    User->>UI: Request Summary
+    UI->>API: POST /chat
+    API->>FileSystem: Load PDF
+    FileSystem-->>API: PDF Content
+    API->>Pipeline: Process Document
+    
+    Pipeline->>Pipeline: Extract Text
+    Pipeline->>Pipeline: Generate Embeddings
+    Pipeline->>Pipeline: Cluster Text
+    Pipeline->>LLM: Generate Summary
+    LLM-->>Pipeline: Summary Text
+    Pipeline-->>API: Processed Summary
+    API-->>UI: Summary Response
+    UI-->>User: Display Summary
 
-### Frontend Technologies
+    User->>UI: Delete Document
+    UI->>API: DELETE /documents/{id}
+    API->>FileSystem: Remove File
+    FileSystem-->>API: Delete Success
+    API-->>UI: Delete Confirmation
+```
 
-1. **React 18**
-   - Functional components
-   - Hooks architecture
-   - Strict mode enabled
 
-2. **TypeScript**
-   - Type safety
-   - Enhanced IDE support
-   - Better code organization
+## **<span style="font-size:1.1em;">Key Technologies</span>**
 
-3. **Tailwind CSS**
-   - Utility-first CSS
-   - Responsive design
-   - Dark mode support
+### **Backend Technologies**
 
-## Implementation Details
+- **<span style="color:#1E90FF;">Flask</span>**  
+  Lightweight web framework with **CORS** support and file handling capabilities.
+- **<span style="color:#1E90FF;">LangChain</span>**  
+  LLM orchestration, document processing, and chain management.
+- **<span style="color:#1E90FF;">Hugging Face</span>**  
+  Embedding models, tokenization, and model management.
 
-### Document Processing Flow
+### **Frontend Technologies**
 
-1. **Upload Phase**
+- **<span style="color:#1E90FF;">React 18</span>**  
+  Functional components, Hooks architecture, Strict Mode enabled.
+- **<span style="color:#1E90FF;">TypeScript</span>**  
+  Type safety, enhanced IDE support, and better code organization.
+- **<span style="color:#1E90FF;">Tailwind CSS</span>**  
+  Utility-first styling, responsive design, and built-in dark mode.
+
+
+
+## **<span style="font-size:1.1em;">Implementation Details</span>**
+
+### **Document Processing Flow**
+
+1. **Upload Phase**  
    ```python
    @app.route('/upload', methods=['POST'])
    def upload_file():
@@ -119,8 +177,10 @@ Built with React and TypeScript, following modern best practices:
        file_id = str(uuid.uuid4())
        file_mappings[file_id] = file.filename
    ```
+   - Receives file from user.  
+   - Generates a unique **file_id** for tracking.
 
-2. **Processing Phase**
+2. **Processing Phase**  
    ```python
    def summarize_document(file_path):
        embeddings = get_embeddings_model()
@@ -128,8 +188,11 @@ Built with React and TypeScript, following modern best practices:
        clustered_texts = cluster_texts(texts, embeddings)
        return summarize_texts(clustered_texts, llm)
    ```
+   - Extracts text and generates embeddings.  
+   - Clusters text for improved **cohesion** in summaries.  
+   - Summarizes the clusters with an **LLM**.
 
-3. **Response Phase**
+3. **Response Phase**  
    ```python
    @app.route('/chat', methods=['POST'])
    def chat():
@@ -137,122 +200,64 @@ Built with React and TypeScript, following modern best practices:
        response = summarize_document(FILE_PATH)
        return jsonify({'response': response})
    ```
-
-## Performance Considerations
-
-1. **Memory Management**
-   - Chunk-based processing
-   - Streaming responses
-   - Resource cleanup
-
-2. **Scalability**
-   - Stateless design
-   - Asynchronous operations
-   - Caching strategies
-
-3. **Error Handling**
-   - Graceful degradation
-   - Comprehensive logging
-   - User feedback
-
-## Security Considerations
-
-1. **API Security**
-   - Environment variables for secrets
-   - Input validation
-   - Rate limiting
-
-2. **File Security**
-   - File type validation
-   - Size limitations
-   - Secure storage
-
-3. **Data Privacy**
-   - Local processing
-   - No permanent storage
-   - Secure transmission
+   - Returns the **summarized text** as JSON.  
+   - Integrates seamlessly with **frontend** for display.
 
 
+### **Class Diagram**
 
-#### Processing Pipeline:
-1. **PDF Ingestion**
-```python
-def extract_text_from_pdf(file_path, chunk_size=2000, chunk_overlap=0):
-    loader = DirectoryLoader(file_path, glob="*.pdf", loader_cls=PyPDFLoader)
-    pages = loader.load()
-    text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=chunk_size, chunk_overlap=chunk_overlap
-    )
-    return text_splitter.split_documents(pages)
+```mermaid
+classDiagram
+    class App {
+        +handleFileUpload()
+        +handleDeleteDocument()
+        +handleBriefingDoc()
+        +toggleDarkMode()
+    }
+
+    class ApiClient {
+        +uploadFile()
+        +deleteDocument()
+        +sendMessage()
+    }
+
+    class FlaskServer {
+        +upload_file()
+        +delete_document()
+        +chat()
+    }
+
+    class SummarizePipeline {
+        +summarize_document()
+        +extract_text()
+        +cluster_texts()
+        +summarize_texts()
+    }
+
+    class ModelService {
+        +get_embeddings_model()
+        +initialize_llm()
+    }
+
+    class Utils {
+        +setup_logger()
+        +extract_text_from_pdf()
+    }
+
+    App --> ApiClient : uses
+    ApiClient --> FlaskServer : calls
+    FlaskServer --> SummarizePipeline : uses
+    SummarizePipeline --> ModelService : depends
+    FlaskServer --> Utils : uses
+    SummarizePipeline --> Utils : uses
+
+    class Logger {
+        +info()
+        +error()
+        +success()
+    }
+
+    Utils --> Logger : uses
+    FlaskServer --> Logger : uses
+    SummarizePipeline --> Logger : uses
 ```
-2. **Embedding Generation**
-```python
-def get_embeddings_model(model_name="BAAI/bge-base-en-v1.5", device="cuda"):
-    encode_kwargs = {"normalize_embeddings": True}
-    return HuggingFaceBgeEmbeddings(
-        model_name=model_name,
-        encode_kwargs=encode_kwargs
-    )
-```
-3. **Text Clustering**
-```python
-def cluster_texts(texts, embeddings, num_clusters=5):
-    filter = EmbeddingsClusteringFilter(
-        embeddings=embeddings,
-        num_clusters=num_clusters
-    )
-    return filter.transform_documents(documents=texts)
-```
-4. **Summarization**
-```python
-def summarize_texts(texts, llm, chain_type="stuff"):
-    checker_chain = load_summarize_chain(llm, chain_type=chain_type)
-    return checker_chain.run(texts)
-```
-
-
-## Dependencies
-### Backend:
-```plaintext
-Flask               # Web framework
-flask_cors          # CORS support
-langchain           # LLM orchestration
-transformers        # ML models
-pinecone            # Vector storage
-unstructured        # PDF processing
-google-genai        # Gemini AI integration
-```
-
-### Frontend:
-```json
-{
-    "react": "^18.3.1",
-  "typescript": "^5.5.3",
-  "tailwindcss": "^3.4.1",
-  "axios": "^1.7.9",
-  "lucide-react": "^0.344.0"
-}
-```
-
-## Key Implementation Details
-
-1. **Document Processing**
-   - Uses PyPDFLoader for text extraction
-   - Implements chunk-based processing for large documents
-   - Maintains document state using unique IDs
-
-2. **AI Integration**
-   - Supports multiple LLM providers (Groq, Google Gemini)
-   - Uses HuggingFace embeddings for semantic analysis
-   - Implements clustering for improved summarization
-
-3. **Frontend Features**
-   - Real-time file upload with progress
-   - Document management interface
-   - Chat-based interaction with AI
-   - Responsive design with dark mode
-
-4. **Security**
-   - API key management via environment variables
-   - Input validation and sanitization
-   - Secure file handling
