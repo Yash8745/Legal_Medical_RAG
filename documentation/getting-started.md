@@ -152,6 +152,26 @@ The frontend will be available at `http://localhost:5173`.
 8. **Manual Cleanup (if necessary)**  
    - If you refreshed without deleting documents and the PDFs do not appear, manually delete the PDFs from the uploads folder.
 
+## Troubleshooting 🚑
+
+If you encounter issues with **Google Gemini**—for example, if the logs show that a summary wasn't generated due to resource quota limits or another Google API issue—follow these steps to temporarily switch to the **Chat Groq** model:
+
+1. **Open the File:**  
+   Navigate to `pipeline/summarize_document.py` in your code editor.
+
+2. **Disable Google Gemini:**  
+   - Find line **51**, which initializes the **Chat Google Generate** LLM.  
+   - Comment out this line.
+
+3. **Enable Chat Groq:**  
+   - Locate line **49**, which initializes the **Chat Groq** LLM.  
+   - Uncomment this line.
+
+4. **Restart the Application:**  
+   Save your changes and restart the application to apply the update.
+
+This temporary workaround will switch summary generation to use the **LLaMA 3 8B** model until the Google Gemini issues are resolved.
+
 ## Next Steps 👉
 
 - See the [Idea and Methodology](idea.md) behind the project.
