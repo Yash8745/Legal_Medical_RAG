@@ -3,5 +3,6 @@
 !.gitkeep
 __pycache__/
 uploads/*
+!uploads/.gitkeep
 /data/*
 tempCodeRunnerFile.py
